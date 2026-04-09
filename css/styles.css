@@ -1,0 +1,116 @@
+/* ─── Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg: #050508;
+  --surface: #11101A;
+  --surface-elevated: #1A1925;
+  --border: #1C1C28;
+  --border-light: #2A2A3A;
+  --primary: #6AB40B;
+  --primary-light: #7ECC12;
+  --primary-dark: #4E8A00;
+  --primary-muted: rgba(106, 180, 11, 0.12);
+  --primary-glow: rgba(106, 180, 11, 0.25);
+  --text-bright: #F5F0FF;
+  --text-primary: #F0F0F5;
+  --text-secondary: #7878A0;
+  --text-muted: #4A4A68;
+  --cta-bg: #EFFFED;
+  --cta-text: #3D7A00;
+
+  --radius-card: 16px;
+  --radius-btn: 14px;
+  --radius-chip: 20px;
+
+  --screen-padding: 20px;
+  --section-gap: 80px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── Tipografia base ────────────────────────────────────── */
+h1, h2, h3, h4 {
+  color: var(--text-bright);
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}
+
+h1 { font-size: clamp(32px, 8vw, 64px); font-weight: 700; letter-spacing: -0.5px; }
+h2 { font-size: clamp(24px, 5vw, 40px); font-weight: 700; }
+h3 { font-size: clamp(18px, 3vw, 24px); font-weight: 700; }
+
+p {
+  color: var(--text-primary);
+  font-size: clamp(15px, 2.5vw, 18px);
+  line-height: 1.7;
+}
+
+/* ─── Utilitários ────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--screen-padding);
+}
+
+.section {
+  padding: var(--section-gap) 0;
+}
+
+.section--surface {
+  background-color: var(--surface);
+}
+
+.label-uppercase {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ─── Animações de entrada (controladas por JS) ──────────── */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-in-up { opacity: 1; transform: none; transition: none; }
+  canvas { display: none; }
+}
