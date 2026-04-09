@@ -4,13 +4,17 @@
 function initNavbar() {
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('navMenu');
-  const links = menu.querySelectorAll('.navbar__link');
+
+  if (!toggle || !menu) return;
+
+  const links = menu.querySelectorAll('.navbar__link, .navbar__cta');
 
   // Hamburguer toggle
   toggle.addEventListener('click', () => {
     const isOpen = menu.classList.toggle('is-open');
     toggle.classList.toggle('is-open', isOpen);
     toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
   });
 
   // Fechar menu ao clicar em link
@@ -20,6 +24,16 @@ function initNavbar() {
       toggle.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
     });
+  });
+
+  // Fechar menu com Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+      menu.classList.remove('is-open');
+      toggle.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
   });
 
   // Active state por scroll (Intersection Observer nas seções)

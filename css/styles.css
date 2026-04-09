@@ -112,6 +112,9 @@ p {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .fade-in-up { opacity: 1; transform: none; transition: none; }
+  .navbar__hamburger span,
+  .navbar__link,
+  .navbar__cta { transition: none; }
   canvas { display: none; }
 }
 
@@ -133,6 +136,12 @@ p {
   align-items: center;
   justify-content: space-between;
   height: 60px;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .navbar__logo-text {
