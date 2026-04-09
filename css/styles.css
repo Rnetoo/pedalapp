@@ -348,7 +348,7 @@ p {
   text-transform: uppercase;
   padding: 6px 14px;
   border-radius: var(--radius-chip);
-  border: 1px solid rgba(106, 180, 11, 0.25);
+  border: 1px solid var(--primary-glow);
   margin-bottom: 24px;
 }
 

@@ -110,11 +110,11 @@ function initCanvas() {
   init();
   draw();
 
+  let resizeTimer;
   window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
     cancelAnimationFrame(raf);
-    resize();
-    init();
-    draw();
+    resizeTimer = setTimeout(() => { resize(); init(); draw(); }, 120);
   });
 }
 
@@ -123,16 +123,17 @@ function initParallax() {
   const img = document.getElementById('heroBgImg');
   if (!img) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  // Desabilitar em mobile (performance)
-  if (window.innerWidth < 768) return;
 
   let ticking = false;
 
   window.addEventListener('scroll', () => {
+    if (window.innerWidth < 768) {
+      img.style.transform = '';
+      return;
+    }
     if (!ticking) {
       requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        img.style.transform = `translateY(${scrollY * 0.4}px)`;
+        img.style.transform = `translateY(${window.scrollY * 0.4}px)`;
         ticking = false;
       });
       ticking = true;
