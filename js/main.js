@@ -170,7 +170,6 @@ function initCarousel() {
   if (!track || !dotsContainer) return;
 
   const items = track.querySelectorAll('.carousel__item');
-  let currentIndex = 0;
 
   // Criar dots
   items.forEach((_, i) => {
@@ -188,12 +187,15 @@ function initCarousel() {
       dot.classList.toggle('is-active', i === index);
       dot.setAttribute('aria-selected', String(i === index));
     });
-    currentIndex = index;
   }
 
   function scrollToItem(index) {
-    const item = items[index];
-    item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    items[index].scrollIntoView({
+      behavior: reducedMotion ? 'instant' : 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
     updateDots(index);
   }
 
