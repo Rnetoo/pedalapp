@@ -141,9 +141,29 @@ function initParallax() {
   }, { passive: true });
 }
 
+/* ─── Intersection Observer — fade-in-up ────────────────── */
+function initObserver() {
+  const els = document.querySelectorAll('.fade-in-up');
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  els.forEach(el => observer.observe(el));
+}
+
 /* ─── Init ──────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCanvas();
   initParallax();
+  initObserver();
 });
