@@ -242,6 +242,11 @@ function initCounter() {
       return;
     }
 
+    // Start progress bar animation concurrently
+    requestAnimationFrame(() => {
+      progressBar.style.width = `${(TARGET / TOTAL) * 100}%`;
+    });
+
     const duration = 1200;
     const start = performance.now();
 
@@ -254,8 +259,6 @@ function initCounter() {
 
       if (progress < 1) {
         requestAnimationFrame(update);
-      } else {
-        progressBar.style.width = `${(TARGET / TOTAL) * 100}%`;
       }
     }
 
@@ -285,7 +288,7 @@ function initForm() {
   const errorName = document.getElementById('errorName');
   const errorEmail = document.getElementById('errorEmail');
 
-  if (!form) return;
+  if (!form || !nameInput || !emailInput || !errorName || !errorEmail || !submitBtn || !formSuccess) return;
 
   function setError(input, errorEl, message) {
     input.classList.toggle('has-error', !!message);
@@ -333,7 +336,8 @@ function initForm() {
     setTimeout(() => {
       form.hidden = true;
       formSuccess.hidden = false;
-      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      formSuccess.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'center' });
     }, 800);
   });
 }

@@ -16,6 +16,8 @@
   --text-muted: #4A4A68;
   --cta-bg: #EFFFED;
   --cta-text: #3D7A00;
+  --error: #EF4444;
+  --error-muted: rgba(239, 68, 68, 0.12);
 
   --radius-card: 16px;
   --radius-btn: 14px;
@@ -941,13 +943,13 @@ p {
 }
 
 .form__input.has-error {
-  border-color: #EF4444;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px var(--error-muted);
 }
 
 .form__error {
   font-size: 12px;
-  color: #EF4444;
+  color: var(--error);
   min-height: 16px;
 }
 
