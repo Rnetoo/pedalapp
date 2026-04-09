@@ -413,7 +413,87 @@
     </div>
   </div>
 </section>
-  <!-- Pré-lançamento -->
+  <section class="section" id="prelancamento" aria-labelledby="form-titulo">
+  <div class="container">
+    <div class="prelancamento">
+      <div class="prelancamento__header">
+        <span class="prelancamento__badge">PREÇO DE FUNDADOR</span>
+        <h2 class="prelancamento__titulo fade-in-up" id="form-titulo">
+          Entre na lista.<br />Seja o primeiro a pedalar com IA.
+        </h2>
+
+        <div class="prelancamento__preco fade-in-up">
+          <span class="prelancamento__preco-de" aria-label="De R$39,90 por mês">R$39,90<span>/mês</span></span>
+          <div class="prelancamento__preco-por">
+            <span class="prelancamento__preco-valor" aria-label="Por apenas R$14,90 por mês">R$14,90</span>
+            <span class="prelancamento__preco-label">/mês</span>
+          </div>
+        </div>
+
+        <p class="prelancamento__urgencia fade-in-up">
+          Apenas <strong>50 vagas</strong> neste preço. Depois do lançamento, o valor sobe para R$39,90/mês.
+        </p>
+
+        <div class="prelancamento__progress fade-in-up" role="group" aria-label="Vagas disponíveis">
+          <div class="sp-progress" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="50" aria-label="32 de 50 vagas preenchidas">
+            <div class="sp-progress__bar" style="width: 64%"></div>
+          </div>
+          <p class="prelancamento__progress-label">
+            <strong>32 de 50 vagas</strong> preenchidas — restam apenas <strong>18</strong>
+          </p>
+        </div>
+      </div>
+
+      <form class="form" id="signupForm" action="#" novalidate aria-label="Formulário de cadastro no pré-lançamento">
+        <div class="form__group">
+          <label for="fieldName" class="form__label">Seu nome</label>
+          <input
+            type="text"
+            id="fieldName"
+            name="name"
+            class="form__input"
+            placeholder="Como prefere ser chamado?"
+            autocomplete="given-name"
+            required
+            aria-required="true"
+          />
+          <span class="form__error" id="errorName" role="alert" aria-live="polite"></span>
+        </div>
+
+        <div class="form__group">
+          <label for="fieldEmail" class="form__label">Seu e-mail</label>
+          <input
+            type="email"
+            id="fieldEmail"
+            name="email"
+            class="form__input"
+            placeholder="seuemail@exemplo.com"
+            autocomplete="email"
+            required
+            aria-required="true"
+          />
+          <span class="form__error" id="errorEmail" role="alert" aria-live="polite"></span>
+        </div>
+
+        <button type="submit" class="btn btn--primary form__submit" id="submitBtn">
+          Garantir minha vaga por R$14,90/mês
+        </button>
+
+        <p class="form__microcopy">Sem spam. Você recebe apenas o aviso de lançamento e seu acesso antecipado.</p>
+      </form>
+
+      <div class="form__success" id="formSuccess" aria-live="polite" hidden>
+        <div class="form__success-icon" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <h3 class="form__success-title">Vaga garantida!</h3>
+        <p class="form__success-text">Você está na lista. Assim que o Pedale-AI lançar, você será o primeiro a saber — com seu preço de fundador garantido.</p>
+      </div>
+    </div>
+  </div>
+</section>
   <!-- Footer -->
   <script src="js/main.js"></script>
 </body>

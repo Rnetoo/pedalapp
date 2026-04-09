@@ -275,6 +275,69 @@ function initCounter() {
   observer.observe(counterEl);
 }
 
+/* ─── Formulário ─────────────────────────────────────────── */
+function initForm() {
+  const form = document.getElementById('signupForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const submitBtn = document.getElementById('submitBtn');
+  const nameInput = document.getElementById('fieldName');
+  const emailInput = document.getElementById('fieldEmail');
+  const errorName = document.getElementById('errorName');
+  const errorEmail = document.getElementById('errorEmail');
+
+  if (!form) return;
+
+  function setError(input, errorEl, message) {
+    input.classList.toggle('has-error', !!message);
+    errorEl.textContent = message;
+  }
+
+  function validateName(value) {
+    if (!value.trim()) return 'Por favor, informe seu nome.';
+    if (value.trim().length < 2) return 'Nome muito curto.';
+    return '';
+  }
+
+  function validateEmail(value) {
+    if (!value.trim()) return 'Por favor, informe seu e-mail.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return 'E-mail inválido.';
+    return '';
+  }
+
+  nameInput.addEventListener('blur', () => {
+    setError(nameInput, errorName, validateName(nameInput.value));
+  });
+
+  emailInput.addEventListener('blur', () => {
+    setError(emailInput, errorEmail, validateEmail(emailInput.value));
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const nameErr = validateName(nameInput.value);
+    const emailErr = validateEmail(emailInput.value);
+
+    setError(nameInput, errorName, nameErr);
+    setError(emailInput, errorEmail, emailErr);
+
+    if (nameErr || emailErr) {
+      const firstError = nameErr ? nameInput : emailInput;
+      firstError.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Garantindo sua vaga...';
+
+    setTimeout(() => {
+      form.hidden = true;
+      formSuccess.hidden = false;
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 800);
+  });
+}
+
 /* ─── Init ──────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
@@ -283,4 +346,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initObserver();
   initCarousel();
   initCounter();
+  initForm();
 });
