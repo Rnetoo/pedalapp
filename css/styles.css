@@ -687,3 +687,111 @@ p {
   .modal-card,
   .modal-card__img { transition: none; }
 }
+
+/* ─── Contador ───────────────────────────────────────────── */
+.sp-counter {
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.sp-counter__number {
+  font-size: clamp(56px, 15vw, 96px);
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sp-counter__label {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.sp-progress {
+  height: 6px;
+  background: var(--border-light);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.sp-progress__bar {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 3px;
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sp-counter__sub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ─── Depoimentos ────────────────────────────────────────── */
+.testimonials {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+@media (min-width: 640px) {
+  .testimonials { grid-template-columns: repeat(2, 1fr); }
+}
+
+.testimonial {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 24px;
+}
+
+.testimonial__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.testimonial__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-muted);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--primary-glow);
+  flex-shrink: 0;
+}
+
+.testimonial__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.testimonial__role {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.testimonial__quote {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-style: italic;
+  border-left: 2px solid var(--primary-muted);
+  padding-left: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-progress__bar { transition: none; }
+}

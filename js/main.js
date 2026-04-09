@@ -215,6 +215,66 @@ function initCarousel() {
   items.forEach(item => itemObserver.observe(item));
 }
 
+/* ─── Contador animado ───────────────────────────────────── */
+function initCounter() {
+  const counterEl = document.getElementById('counterValue');
+  const progressBar = document.getElementById('spProgressBar');
+  if (!counterEl || !progressBar) return;
+
+  const TARGET = 32;
+  const TOTAL = 50;
+  let animated = false;
+
+  function easeOut(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function animateCounter() {
+    if (animated) return;
+    animated = true;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reducedMotion) {
+      counterEl.textContent = TARGET;
+      counterEl.setAttribute('aria-label', `${TARGET} ciclistas`);
+      progressBar.style.width = `${(TARGET / TOTAL) * 100}%`;
+      return;
+    }
+
+    const duration = 1200;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.round(easeOut(progress) * TARGET);
+      counterEl.textContent = value;
+      counterEl.setAttribute('aria-label', `${value} ciclistas`);
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        progressBar.style.width = `${(TARGET / TOTAL) * 100}%`;
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  const observer = new IntersectionObserver(
+    entries => {
+      if (entries[0].isIntersecting) {
+        animateCounter();
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.3 }
+  );
+
+  observer.observe(counterEl);
+}
+
 /* ─── Init ──────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
@@ -222,4 +282,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initObserver();
   initCarousel();
+  initCounter();
 });
