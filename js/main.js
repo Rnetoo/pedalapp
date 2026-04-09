@@ -1,5 +1,8 @@
 'use strict';
 
+/* ─── Constants ─────────────────────────────────────────── */
+const PRIMARY_RGB = '106, 180, 11'; // keep in sync with --primary in styles.css
+
 /* ─── Navbar ────────────────────────────────────────────── */
 function initNavbar() {
   const toggle = document.getElementById('navToggle');
@@ -91,7 +94,7 @@ function initCanvas() {
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(p.x + p.length, p.y);
-      ctx.strokeStyle = `rgba(106, 180, 11, ${p.opacity})`;
+      ctx.strokeStyle = `rgba(${PRIMARY_RGB}, ${p.opacity})`;
       ctx.lineWidth = p.width;
       ctx.stroke();
 
