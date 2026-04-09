@@ -163,10 +163,61 @@ function initObserver() {
   els.forEach(el => observer.observe(el));
 }
 
+/* ─── Carrossel ──────────────────────────────────────────── */
+function initCarousel() {
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+  if (!track || !dotsContainer) return;
+
+  const items = track.querySelectorAll('.carousel__item');
+  let currentIndex = 0;
+
+  // Criar dots
+  items.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel__dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Screenshot ${i + 1}`);
+    dot.setAttribute('aria-selected', String(i === 0));
+    dot.addEventListener('click', () => scrollToItem(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateDots(index) {
+    dotsContainer.querySelectorAll('.carousel__dot').forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+      dot.setAttribute('aria-selected', String(i === index));
+    });
+    currentIndex = index;
+  }
+
+  function scrollToItem(index) {
+    const item = items[index];
+    item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    updateDots(index);
+  }
+
+  // Atualizar dots ao scrollar
+  const itemObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          const index = Array.from(items).indexOf(entry.target);
+          if (index !== -1) updateDots(index);
+        }
+      });
+    },
+    { root: track, threshold: 0.5 }
+  );
+
+  items.forEach(item => itemObserver.observe(item));
+}
+
 /* ─── Init ──────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCanvas();
   initParallax();
   initObserver();
+  initCarousel();
 });
