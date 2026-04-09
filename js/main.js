@@ -54,7 +54,95 @@ function initNavbar() {
   sections.forEach(s => observer.observe(s));
 }
 
+/* ─── Canvas — Partículas de velocidade ─────────────────── */
+function initCanvas() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let raf;
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function createParticle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      length: Math.random() * 120 + 40,
+      speed: Math.random() * 6 + 3,
+      opacity: Math.random() * 0.15 + 0.04,
+      width: Math.random() * 1.5 + 0.5,
+    };
+  }
+
+  function init() {
+    particles = Array.from({ length: 30 }, createParticle);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x + p.length, p.y);
+      ctx.strokeStyle = `rgba(106, 180, 11, ${p.opacity})`;
+      ctx.lineWidth = p.width;
+      ctx.stroke();
+
+      p.x += p.speed;
+
+      if (p.x > canvas.width + p.length) {
+        p.x = -p.length - Math.random() * 200;
+        p.y = Math.random() * canvas.height;
+      }
+    });
+
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize();
+  init();
+  draw();
+
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(raf);
+    resize();
+    init();
+    draw();
+  });
+}
+
+/* ─── Parallax ───────────────────────────────────────────── */
+function initParallax() {
+  const img = document.getElementById('heroBgImg');
+  if (!img) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // Desabilitar em mobile (performance)
+  if (window.innerWidth < 768) return;
+
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        img.style.transform = `translateY(${scrollY * 0.4}px)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
 /* ─── Init ──────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
+  initCanvas();
+  initParallax();
 });
