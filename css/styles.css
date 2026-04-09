@@ -21,8 +21,8 @@
   --radius-btn: 14px;
   --radius-chip: 20px;
 
-  --screen-padding: 20px;
-  --section-gap: 80px;
+  --screen-padding: clamp(16px, 4vw, 28px);
+  --section-gap: clamp(48px, 8vw, 80px);
 }
 
 /* ─── Reset ──────────────────────────────────────────────── */
