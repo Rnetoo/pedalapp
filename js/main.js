@@ -342,6 +342,21 @@ function initForm() {
   });
 }
 
+/* ─── Scroll to top ──────────────────────────────────────── */
+function initScrollTop() {
+  const btn = document.getElementById('scrollTop');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.hidden = window.scrollY < 400;
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'instant' : 'smooth' });
+  });
+}
+
 /* ─── Init ──────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
@@ -351,4 +366,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
   initCounter();
   initForm();
+  initScrollTop();
 });

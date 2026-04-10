@@ -45,6 +45,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  padding-top: 60px;
 }
 
 img {
@@ -336,7 +337,7 @@ p {
 .hero__content {
   position: relative;
   z-index: 3;
-  padding-top: 80px;
+  padding-top: 20px;
   padding-bottom: 80px;
 }
 
@@ -1088,4 +1089,37 @@ p {
 @media (prefers-reduced-motion: reduce) {
   .footer__link,
   .footer__social-link { transition: none; }
+}
+
+/* ─── Scroll to top ──────────────────────────────────────── */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.scroll-top:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.scroll-top[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top { transition: none; }
 }
