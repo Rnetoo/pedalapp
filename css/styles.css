@@ -1031,6 +1031,12 @@ p {
   margin-top: 8px;
 }
 
+.footer__brand a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 .footer__nav ul {
   list-style: none;
   display: flex;
