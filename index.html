@@ -1,543 +1,260 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Pedale-AI — O treinador de ciclismo com IA que cabe no bolso. Planos personalizados para MTB, Gravel e Speed. Pré-lançamento: R$14,90/mês." />
-  <title>Pedale-AI — Seu Treinador de Ciclismo com IA</title>
+
+  <title>Pedale-AI — Pare de pedalar no escuro</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
-  <nav class="navbar" id="navbar" aria-label="Navegação principal">
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar">
     <div class="container navbar__inner">
-      <a href="#hero" class="navbar__logo" aria-label="Pedale-AI — página inicial">
-        <span class="navbar__logo-text">Pedale<span class="navbar__logo-accent">-AI</span></span>
+
+      <a href="#" class="navbar__logo">
+        <span class="navbar__logo-text">
+          Pedale<span class="navbar__logo-accent">-AI</span>
+        </span>
       </a>
 
-      <button class="navbar__hamburger" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMenu">
-        <span></span><span></span><span></span>
+      <button id="navToggle" class="navbar__hamburger" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
 
-      <ul class="navbar__menu" id="navMenu" role="list">
-        <li><a href="#problema" class="navbar__link">O Problema</a></li>
+      <ul id="navMenu" class="navbar__menu">
+        <li><a href="#problema" class="navbar__link">Problema</a></li>
         <li><a href="#solucao" class="navbar__link">Solução</a></li>
-        <li><a href="#funcionalidades" class="navbar__link">Funcionalidades</a></li>
-        <li><a href="#modalidades" class="navbar__link">Modalidades</a></li>
-        <li>
-          <a href="#prelancamento" class="navbar__cta">
-            Garantir vaga
-          </a>
-        </li>
+        <li><a href="#prelancamento" class="navbar__cta">Garantir vaga</a></li>
       </ul>
+
     </div>
   </nav>
-  <section class="hero" id="hero" aria-label="Apresentação">
-    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-    <div class="hero__bg" id="heroBg" role="img" aria-label="Ciclista em estrada">
-      <img
-        src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1600&q=80"
-        alt=""
-        class="hero__bg-img"
-        id="heroBgImg"
-        aria-hidden="true"
-      />
-      <div class="hero__overlay" aria-hidden="true"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero__bg">
+      <img src="https://images.unsplash.com/photo-1518655048521-f130df041f66" class="hero__bg-img" />
+      <div class="hero__overlay"></div>
     </div>
 
+    <canvas id="heroCanvas" class="hero__canvas"></canvas>
+
     <div class="container hero__content">
-      <div class="hero__badge" aria-label="Informação de pré-lançamento">
-        <span>50 VAGAS</span>
-        <span class="hero__badge-sep" aria-hidden="true">·</span>
-        <span>PRÉ-LANÇAMENTO</span>
-        <span class="hero__badge-sep" aria-hidden="true">·</span>
-        <span>R$14,90/mês</span>
+
+      <div class="hero__badge fade-in-up">
+        🚀 PRÉ-LANÇAMENTO • 50 VAGAS • R$14,90/mês
       </div>
 
       <h1 class="hero__headline fade-in-up">
-        Chega de pedalar<br />sem saber o que<br />está fazendo.
+        <span>Você não precisa pedalar mais.</span><br />
+        <span><strong>Precisa pedalar certo.</strong></span>
       </h1>
 
       <p class="hero__sub fade-in-up">
-        Pedale-AI é o treinador de ciclismo com IA que monta seu plano,
-        analisa seu esforço e evolui com você — direto no seu bolso.
+        O Pedale-AI cria seu plano de treino personalizado,
+        ajusta sua evolução automaticamente e te mostra exatamente o que fazer.
       </p>
 
       <div class="hero__actions fade-in-up">
-        <a href="#prelancamento" class="btn btn--primary">
-          Quero ser avisado
-        </a>
-        <a href="#funcionalidades" class="btn btn--secondary">
-          Ver funcionalidades
+        <a href="#prelancamento" class="btn btn--primary btn--large">
+          Quero treinar com inteligência
         </a>
       </div>
+
     </div>
   </section>
-  <section class="section section--surface" id="problema" aria-labelledby="problema-titulo">
-  <div class="container">
-    <p class="label-uppercase fade-in-up">O problema</p>
-    <h2 class="section__headline fade-in-up" id="problema-titulo">
-      Você pedala. Mas está evoluindo?
-    </h2>
-    <p class="section__sub fade-in-up">
-      A maioria dos ciclistas amadores treina com dedicação, mas sem estrutura.
-      O resultado é esforço sem direção.
-    </p>
 
-    <div class="cards-grid cards-grid--3">
-      <article class="card fade-in-up" style="--delay: 0.1s">
-        <div class="card__icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-        </div>
-        <h3 class="card__title">Treina no feeling</h3>
-        <p class="card__text">Sem referência de intensidade, você pode estar sempre treinando forte demais — ou de menos.</p>
-      </article>
+  <!-- PROBLEMA -->
+  <section id="problema" class="section section--surface">
+    <div class="container">
 
-      <article class="card fade-in-up" style="--delay: 0.2s">
-        <div class="card__icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-          </svg>
-        </div>
-        <h3 class="card__title">Não conhece suas zonas de FC</h3>
-        <p class="card__text">Frequência cardíaca é a ferramenta mais poderosa do ciclismo amador — e a mais ignorada.</p>
-      </article>
+      <h2 class="section__headline fade-in-up">
+        A verdade que ninguém te fala:
+      </h2>
 
-      <article class="card fade-in-up" style="--delay: 0.3s">
-        <div class="card__icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
-          </svg>
-        </div>
-        <h3 class="card__title">Plano genérico do YouTube</h3>
-        <p class="card__text">Treinos copiados da internet não consideram seu histórico, seu nível ou seus objetivos.</p>
-      </article>
-    </div>
-  </div>
-</section>
-  <section class="section" id="solucao" aria-labelledby="solucao-titulo">
-  <div class="container">
-    <p class="label-uppercase fade-in-up">A solução</p>
-    <h2 class="section__headline fade-in-up" id="solucao-titulo">Pedale-AI resolve isso.</h2>
-    <p class="section__sub fade-in-up">
-      Inteligência artificial aplicada ao ciclismo amador. Sem complicação, sem planilha.
-    </p>
-
-    <div class="cards-grid cards-grid--3">
-      <article class="card card--pillar fade-in-up" style="--delay: 0.1s">
-        <div class="card__icon card__icon--large" aria-hidden="true">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-          </svg>
-        </div>
-        <h3 class="card__title">Plano Personalizado por IA</h3>
-        <p class="card__text">Seu plano semanal é gerado com base no seu nível, disponibilidade e objetivos. Atualizado conforme você evolui.</p>
-      </article>
-
-      <article class="card card--pillar fade-in-up" style="--delay: 0.2s">
-        <div class="card__icon card__icon--large" aria-hidden="true">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-          </svg>
-        </div>
-        <h3 class="card__title">Zonas de Treino Inteligentes</h3>
-        <p class="card__text">Calcule suas 5 zonas de frequência cardíaca e treine na intensidade certa para cada objetivo.</p>
-      </article>
-
-      <article class="card card--pillar fade-in-up" style="--delay: 0.3s">
-        <div class="card__icon card__icon--large" aria-hidden="true">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
-          </svg>
-        </div>
-        <h3 class="card__title">Evolução Contínua</h3>
-        <p class="card__text">O app aprende com seus treinos, monitora sua fadiga e ajusta a carga para que você evolua sem se machucar.</p>
-      </article>
-    </div>
-  </div>
-</section>
-  <section class="section section--surface" id="funcionalidades" aria-labelledby="func-titulo">
-  <div class="container">
-    <p class="label-uppercase fade-in-up">Funcionalidades</p>
-    <h2 class="section__headline fade-in-up" id="func-titulo">
-      Tudo que você precisa.<br />Nada que você não usa.
-    </h2>
-
-    <div class="features">
-      <article class="feature fade-in-up">
-        <div class="feature__img-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?w=800&q=80"
-            alt="Ciclista consultando plano de treino no celular"
-            class="feature__img"
-            loading="lazy"
-          />
-        </div>
-        <div class="feature__content">
-          <span class="feature__num" aria-hidden="true">01</span>
-          <h3 class="feature__title">Plano Semanal Adaptativo</h3>
-          <p class="feature__text">A IA monta seu calendário de treinos considerando seus dias disponíveis, seu nível atual e sua meta. Cada semana, o plano evolui com você.</p>
-        </div>
-      </article>
-
-      <article class="feature feature--reverse fade-in-up">
-        <div class="feature__img-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=800&q=80"
-            alt="Ciclista descansando após treino"
-            class="feature__img"
-            loading="lazy"
-          />
-        </div>
-        <div class="feature__content">
-          <span class="feature__num" aria-hidden="true">02</span>
-          <h3 class="feature__title">Check-in de Prontidão Diário</h3>
-          <p class="feature__text">Antes de pedalar, responda um check-in rápido. O app identifica sinais de fadiga e ajusta a intensidade do treino do dia automaticamente.</p>
-        </div>
-      </article>
-
-      <article class="feature fade-in-up">
-        <div class="feature__img-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
-            alt="Ciclista registrando treino"
-            class="feature__img"
-            loading="lazy"
-          />
-        </div>
-        <div class="feature__content">
-          <span class="feature__num" aria-hidden="true">03</span>
-          <h3 class="feature__title">Registro de Treino Simplificado</h3>
-          <p class="feature__text">Registre distância, duração, sensação e FC em segundos. O histórico fica organizado para você acompanhar sua evolução semana a semana.</p>
-        </div>
-      </article>
-
-      <article class="feature feature--reverse fade-in-up">
-        <div class="feature__img-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?w=800&q=80"
-            alt="Monitor de frequência cardíaca em ciclismo"
-            class="feature__img"
-            loading="lazy"
-          />
-        </div>
-        <div class="feature__content">
-          <span class="feature__num" aria-hidden="true">04</span>
-          <h3 class="feature__title">Análise de Zonas de FC</h3>
-          <p class="feature__text">Visualize quanto tempo você passou em cada zona no treino. Entenda se está treinando com a intensidade certa para seus objetivos.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-  <section class="section" id="app-em-acao" aria-labelledby="app-titulo">
-  <div class="container">
-    <p class="label-uppercase fade-in-up">App em ação</p>
-    <h2 class="section__headline fade-in-up" id="app-titulo">Veja o app na prática.</h2>
-    <p class="section__sub fade-in-up">
-      Interface limpa, dados relevantes, sem distrações. Feito para você usar durante e depois do treino.
-    </p>
-  </div>
-
-  <div class="carousel fade-in-up" role="region" aria-label="Screenshots do app Pedale-AI">
-    <div class="carousel__track" id="carouselTrack">
-
-      <figure class="carousel__item">
-        <div class="phone-frame">
-          <img
-            src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80"
-            alt="Tela de plano semanal do Pedale-AI — placeholder"
-            class="phone-frame__img"
-            loading="lazy"
-          />
-        </div>
-        <figcaption class="carousel__caption">Plano semanal</figcaption>
-      </figure>
-
-      <figure class="carousel__item">
-        <div class="phone-frame">
-          <img
-            src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&q=80"
-            alt="Tela de check-in de prontidão — placeholder"
-            class="phone-frame__img"
-            loading="lazy"
-          />
-        </div>
-        <figcaption class="carousel__caption">Check-in diário</figcaption>
-      </figure>
-
-      <figure class="carousel__item">
-        <div class="phone-frame">
-          <img
-            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80"
-            alt="Tela de registro de treino — placeholder"
-            class="phone-frame__img"
-            loading="lazy"
-          />
-        </div>
-        <figcaption class="carousel__caption">Registro de treino</figcaption>
-      </figure>
-
-      <figure class="carousel__item">
-        <div class="phone-frame">
-          <img
-            src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=400&q=80"
-            alt="Tela de zonas de frequência cardíaca — placeholder"
-            class="phone-frame__img"
-            loading="lazy"
-          />
-        </div>
-        <figcaption class="carousel__caption">Zonas de FC</figcaption>
-      </figure>
-
-      <figure class="carousel__item">
-        <div class="phone-frame">
-          <img
-            src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=400&q=80"
-            alt="Tela de histórico e evolução — placeholder"
-            class="phone-frame__img"
-            loading="lazy"
-          />
-        </div>
-        <figcaption class="carousel__caption">Histórico e evolução</figcaption>
-      </figure>
-
-    </div>
-
-    <div class="carousel__dots" role="tablist" aria-label="Navegar entre screenshots" id="carouselDots"></div>
-  </div>
-</section>
-  <section class="section section--surface" id="modalidades" aria-labelledby="modal-titulo">
-  <div class="container">
-    <p class="label-uppercase fade-in-up">Modalidades</p>
-    <h2 class="section__headline fade-in-up" id="modal-titulo">Para o seu estilo de pedal.</h2>
-    <p class="section__sub fade-in-up">
-      Seja qual for a sua bike, o Pedale-AI entende suas demandas e entrega treinos para o seu terreno.
-    </p>
-
-    <div class="cards-grid cards-grid--3">
-      <article class="modal-card fade-in-up" style="--delay: 0.1s">
-        <img
-          src="https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?w=800&q=80"
-          alt="Mountain bike em trilha"
-          class="modal-card__img"
-          loading="lazy"
-        />
-        <div class="modal-card__overlay" aria-hidden="true"></div>
-        <div class="modal-card__content">
-          <span class="modal-card__badge">MTB</span>
-          <h3 class="modal-card__title">Mountain Bike</h3>
-          <p class="modal-card__text">Trilhas, subidas e descidas. Treinos de força e resistência para dominar o off-road.</p>
-        </div>
-      </article>
-
-      <article class="modal-card fade-in-up" style="--delay: 0.2s">
-        <img
-          src="https://images.unsplash.com/photo-1558816280-dee9521ff364?w=800&q=80"
-          alt="Ciclista gravel em estrada de terra"
-          class="modal-card__img"
-          loading="lazy"
-        />
-        <div class="modal-card__overlay" aria-hidden="true"></div>
-        <div class="modal-card__content">
-          <span class="modal-card__badge">Gravel</span>
-          <h3 class="modal-card__title">Gravel</h3>
-          <p class="modal-card__text">Aventura sem fronteiras. Foco em resistência aeróbica para os longos percursos mistos.</p>
-        </div>
-      </article>
-
-      <article class="modal-card fade-in-up" style="--delay: 0.3s">
-        <img
-          src="https://images.unsplash.com/photo-1502164980785-f8aa41d53611?w=800&q=80"
-          alt="Ciclista speed em estrada asfaltada"
-          class="modal-card__img"
-          loading="lazy"
-        />
-        <div class="modal-card__overlay" aria-hidden="true"></div>
-        <div class="modal-card__content">
-          <span class="modal-card__badge">Speed</span>
-          <h3 class="modal-card__title">Speed</h3>
-          <p class="modal-card__text">Estrada, performance e velocidade. Treinos em zonas de potência para evoluir cada watt.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-  <section class="section" id="social-proof" aria-labelledby="sp-titulo">
-  <div class="container">
-    <div class="sp-counter fade-in-up" aria-live="polite">
-      <p class="sp-counter__number">
-        <span id="counterValue" aria-label="0 ciclistas">0</span>
+      <p class="section__sub fade-in-up">
+        A maioria dos ciclistas não evolui porque treina errado.
       </p>
-      <p class="sp-counter__label">ciclistas já garantiram sua vaga</p>
-      <div class="sp-progress" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="50" aria-label="32 de 50 vagas preenchidas">
-        <div class="sp-progress__bar" id="spProgressBar" style="width: 0%"></div>
+
+      <div class="cards-grid cards-grid--3">
+
+        <article class="card">
+          <h3 class="card__title">Você treina no feeling</h3>
+          <p class="card__text">Sem controle de intensidade, você não evolui.</p>
+        </article>
+
+        <article class="card">
+          <h3 class="card__title">Você não controla zonas</h3>
+          <p class="card__text">Pedala errado na maior parte do tempo.</p>
+        </article>
+
+        <article class="card">
+          <h3 class="card__title">Treinos genéricos</h3>
+          <p class="card__text">Nada é adaptado à sua realidade.</p>
+        </article>
+
       </div>
-      <p class="sp-counter__sub">32 de 50 vagas preenchidas</p>
+
     </div>
+  </section>
 
-    <h2 class="section__headline fade-in-up" id="sp-titulo" style="text-align:center; margin-top: 64px;">
-      O que nossos testadores dizem.
-    </h2>
+  <!-- SOLUÇÃO -->
+  <section id="solucao" class="section">
+    <div class="container">
 
-    <div class="testimonials fade-in-up">
-      <article class="testimonial" aria-label="Depoimento de Carlos M.">
-        <div class="testimonial__header">
-          <div class="testimonial__avatar" aria-hidden="true">CM</div>
-          <div>
-            <p class="testimonial__name">Carlos M.</p>
-            <p class="testimonial__role">Ciclista Gravel · SP</p>
-          </div>
-        </div>
-        <blockquote class="testimonial__quote">
-          "Finalmente entendi o que são as zonas de frequência cardíaca e como aplicar nos meus treinos. Em 6 semanas melhorei meu tempo no percurso de referência."
-        </blockquote>
-      </article>
+      <h2 class="section__headline fade-in-up">
+        É exatamente isso que o Pedale-AI resolve.
+      </h2>
 
-      <article class="testimonial" aria-label="Depoimento de Ana P.">
-        <div class="testimonial__header">
-          <div class="testimonial__avatar" aria-hidden="true">AP</div>
-          <div>
-            <p class="testimonial__name">Ana P.</p>
-            <p class="testimonial__role">MTB · MG</p>
-          </div>
-        </div>
-        <blockquote class="testimonial__quote">
-          "O check-in de prontidão me salvou de treinar com fadiga acumulada duas vezes. Parece simples, mas fez toda a diferença na minha recuperação."
-        </blockquote>
-      </article>
+      <div class="cards-grid cards-grid--3">
+
+        <article class="card card--pillar">
+          <h3 class="card__title">Plano personalizado</h3>
+          <p class="card__text">Baseado no seu nível e objetivo.</p>
+        </article>
+
+        <article class="card card--pillar">
+          <h3 class="card__title">Treinos corretos</h3>
+          <p class="card__text">Você sabe quando forçar e quando recuperar.</p>
+        </article>
+
+        <article class="card card--pillar">
+          <h3 class="card__title">Evolução automática</h3>
+          <p class="card__text">O sistema se adapta com você.</p>
+        </article>
+
+      </div>
+
     </div>
-  </div>
-</section>
-  <section class="section" id="prelancamento" aria-labelledby="form-titulo">
-  <div class="container">
-    <div class="prelancamento">
-      <div class="prelancamento__header">
-        <span class="prelancamento__badge">PREÇO DE FUNDADOR</span>
-        <h2 class="prelancamento__titulo fade-in-up" id="form-titulo">
-          Entre na lista.<br />Seja o primeiro a pedalar com IA.
-        </h2>
+  </section>
 
-        <div class="prelancamento__preco fade-in-up">
-          <span class="prelancamento__preco-de" aria-label="De R$39,90 por mês">R$39,90<span>/mês</span></span>
+  <!-- PROVA SOCIAL -->
+  <section id="social-proof" class="section section--surface">
+    <div class="container">
+
+      <div class="sp-counter">
+        <div id="counterValue" class="sp-counter__number">0</div>
+        <p class="sp-counter__label">pessoas já interessadas</p>
+
+        <div class="sp-progress">
+          <div id="spProgressBar" class="sp-progress__bar"></div>
+        </div>
+
+        <p class="sp-counter__sub">Vagas limitadas</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRE-LANÇAMENTO -->
+  <section id="prelancamento" class="section">
+    <div class="container">
+
+      <div class="prelancamento">
+
+        <div class="prelancamento__header">
+          <div class="prelancamento__badge">OFERTA DE FUNDADOR</div>
+
+          <h2 class="prelancamento__titulo">
+            Entre agora e garanta o menor preço.
+          </h2>
+        </div>
+
+        <div class="prelancamento__preco">
+          <div class="prelancamento__preco-de">R$29,90</div>
+
           <div class="prelancamento__preco-por">
-            <span class="prelancamento__preco-valor" aria-label="Por apenas R$14,90 por mês">R$14,90</span>
+            <span class="prelancamento__preco-valor">14,90</span>
             <span class="prelancamento__preco-label">/mês</span>
           </div>
         </div>
 
-        <p class="prelancamento__urgencia fade-in-up">
-          Apenas <strong>50 vagas</strong> neste preço. Depois do lançamento, o valor sobe para R$39,90/mês.
+        <p class="prelancamento__urgencia">
+          Restam poucas vagas com preço reduzido.
         </p>
 
-        <div class="prelancamento__progress fade-in-up" role="group" aria-label="Vagas disponíveis">
-          <div class="sp-progress" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="50" aria-label="32 de 50 vagas preenchidas">
-            <div class="sp-progress__bar" style="width: 64%"></div>
+        <!-- FORM -->
+        <form id="signupForm" class="form">
+
+          <div class="form__group">
+            <label class="form__label">Nome</label>
+            <input id="fieldName" class="form__input" type="text" />
+            <span id="errorName" class="form__error"></span>
           </div>
-          <p class="prelancamento__progress-label">
-            <strong>32 de 50 vagas</strong> preenchidas — restam apenas <strong>18</strong>
+
+          <div class="form__group">
+            <label class="form__label">E-mail</label>
+            <input id="fieldEmail" class="form__input" type="email" />
+            <span id="errorEmail" class="form__error"></span>
+          </div>
+
+          <button id="submitBtn" class="btn btn--primary form__submit">
+            Garantir minha vaga
+          </button>
+
+          <p class="form__microcopy">
+            Sem spam. Só acesso antecipado.
+          </p>
+
+        </form>
+
+        <!-- SUCCESS -->
+        <div id="formSuccess" class="form__success" hidden>
+          <h3 class="form__success-title">Cadastro confirmado 🚀</h3>
+          <p class="form__success-text">
+            Você será avisado assim que liberarmos o acesso.
           </p>
         </div>
+
       </div>
 
-      <form class="form" id="signupForm" action="#" novalidate aria-label="Formulário de cadastro no pré-lançamento">
-        <div class="form__group">
-          <label for="fieldName" class="form__label">Seu nome</label>
-          <input
-            type="text"
-            id="fieldName"
-            name="name"
-            class="form__input"
-            placeholder="Como prefere ser chamado?"
-            autocomplete="given-name"
-            required
-            aria-required="true"
-          />
-          <span class="form__error" id="errorName" role="alert" aria-live="polite"></span>
-        </div>
+    </div>
+  </section>
 
-        <div class="form__group">
-          <label for="fieldEmail" class="form__label">Seu e-mail</label>
-          <input
-            type="email"
-            id="fieldEmail"
-            name="email"
-            class="form__input"
-            placeholder="seuemail@exemplo.com"
-            autocomplete="email"
-            required
-            aria-required="true"
-          />
-          <span class="form__error" id="errorEmail" role="alert" aria-live="polite"></span>
-        </div>
+  <!-- SCROLL TOP -->
+  <button id="scrollTop" class="scroll-top" hidden>↑</button>
 
-        <button type="submit" class="btn btn--primary form__submit" id="submitBtn">
-          Garantir minha vaga por R$14,90/mês
-        </button>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
 
-        <p class="form__microcopy">Sem spam. Você recebe apenas o aviso de lançamento e seu acesso antecipado.</p>
-      </form>
-
-      <div class="form__success" id="formSuccess" aria-live="polite" hidden>
-        <div class="form__success-icon" aria-hidden="true">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </div>
-        <h3 class="form__success-title">Vaga garantida!</h3>
-        <p class="form__success-text">Você está na lista. Assim que o Pedale-AI lançar, você será o primeiro a saber — com seu preço de fundador garantido.</p>
+      <div class="footer__brand">
+        <strong>Pedale-AI</strong>
+        <p class="footer__tagline">
+          Treine com inteligência.
+        </p>
       </div>
-    </div>
-  </div>
-</section>
-  <footer class="footer" role="contentinfo">
-  <div class="container footer__inner">
-    <div class="footer__brand">
-      <a href="#hero" class="navbar__logo-text" aria-label="Pedale-AI — voltar ao topo">
-        Pedale<span class="navbar__logo-accent">-AI</span>
-      </a>
-      <p class="footer__tagline">Seu treinador de ciclismo no bolso.</p>
+
+      <div class="footer__nav">
+        <ul>
+          <li><a href="#" class="footer__link">Termos</a></li>
+          <li><a href="#" class="footer__link">Privacidade</a></li>
+        </ul>
+      </div>
+
     </div>
 
-    <nav class="footer__nav" aria-label="Links de rodapé">
-      <ul role="list">
-        <li><a href="#problema" class="footer__link">O Problema</a></li>
-        <li><a href="#solucao" class="footer__link">Solução</a></li>
-        <li><a href="#funcionalidades" class="footer__link">Funcionalidades</a></li>
-        <li><a href="#modalidades" class="footer__link">Modalidades</a></li>
-        <li><a href="#prelancamento" class="footer__link">Pré-lançamento</a></li>
-      </ul>
-    </nav>
-
-    <div class="footer__social">
-      <a href="#" class="footer__social-link" aria-label="Instagram do Pedale-AI">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-        </svg>
-      </a>
-      <a href="#" class="footer__social-link" aria-label="Strava do Pedale-AI">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-        </svg>
-      </a>
+    <div class="footer__bottom">
+      <p>© 2026 Pedale-AI</p>
     </div>
-  </div>
+  </footer>
 
-  <div class="footer__bottom">
-    <div class="container">
-      <p>© 2026 Pedale-AI. Todos os direitos reservados.</p>
-    </div>
-  </div>
-</footer>
-  <button class="scroll-top" id="scrollTop" aria-label="Voltar ao topo" hidden>
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <polyline points="18 15 12 9 6 15"/>
-  </svg>
-</button>
-  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/script.js"></script>
+
 </body>
+
 </html>

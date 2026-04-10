@@ -1,66 +1,232 @@
 'use strict';
 
-/* ─── Constants ─────────────────────────────────────────── */
-const PRIMARY_RGB = '106, 180, 11'; // keep in sync with --primary in styles.css
+/* =========================
+   SAFE HELPERS
+========================= */
+const $  = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-/* ─── Navbar ────────────────────────────────────────────── */
-function initNavbar() {
-  const toggle = document.getElementById('navToggle');
-  const menu = document.getElementById('navMenu');
+/* =========================
+   GSAP INIT (SAFE)
+========================= */
+if (typeof gsap !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.defaults({
+    ease: "power3.out",
+    duration: 1
+  });
+}
+
+/* =========================
+   HERO ANIMATION
+========================= */
+(function initHero() {
+  if (typeof gsap === 'undefined') return;
+
+  const hero = $('.hero');
+  if (!hero) return;
+
+  const tl = gsap.timeline();
+
+  tl
+    .from(".hero__badge", { y: 40, opacity: 0 })
+    .from(".hero__headline span", {
+      y: 80,
+      opacity: 0,
+      stagger: 0.08
+    }, "-=0.5")
+    .from(".hero__sub", { y: 40, opacity: 0 }, "-=0.5")
+    .from(".hero__actions", { y: 40, opacity: 0 }, "-=0.5")
+    .from(".hero__bg-img", { scale: 1.15, duration: 2 }, 0);
+})();
+
+/* =========================
+   PARALLAX HERO
+========================= */
+(function initParallax() {
+  if (typeof gsap === 'undefined') return;
+
+  const bg = $('.hero__bg-img');
+  if (!bg) return;
+
+  gsap.to(bg, {
+    yPercent: 20,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: true
+    }
+  });
+})();
+
+/* =========================
+   NAVBAR SCROLL
+========================= */
+(function initNavbarScroll() {
+  if (typeof ScrollTrigger === 'undefined') return;
+
+  const nav = $('#navbar');
+  if (!nav) return;
+
+  ScrollTrigger.create({
+    start: "top -80",
+    onEnter: () => nav.classList.add("scrolled"),
+    onLeaveBack: () => nav.classList.remove("scrolled")
+  });
+})();
+
+/* =========================
+   REVEAL ELEMENTS
+========================= */
+(function initReveal() {
+  if (typeof gsap === 'undefined') return;
+
+  $$('.fade-in-up').forEach(el => {
+    if (el.closest('.cards-grid')) return;
+
+    gsap.from(el, {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%"
+      }
+    });
+  });
+})();
+
+/* =========================
+   CARDS STAGGER
+========================= */
+(function initCards() {
+  if (typeof gsap === 'undefined') return;
+
+  $$('.cards-grid').forEach(grid => {
+    const cards = $$('.card', grid);
+
+    gsap.from(cards, {
+      y: 60,
+      opacity: 0,
+      stagger: 0.12,
+      scrollTrigger: {
+        trigger: grid,
+        start: "top 80%"
+      }
+    });
+  });
+})();
+
+/* =========================
+   COUNTER
+========================= */
+(function initCounter() {
+  if (typeof gsap === 'undefined') return;
+
+  const el = $('#counterValue');
+  const section = $('#social-proof');
+
+  if (!el || !section) return;
+
+  const obj = { value: 0 };
+
+  gsap.to(obj, {
+    value: 32,
+    duration: 2,
+    scrollTrigger: {
+      trigger: section,
+      start: "top 80%"
+    },
+    onUpdate: () => {
+      el.textContent = Math.floor(obj.value);
+    }
+  });
+})();
+
+/* =========================
+   PROGRESS BAR
+========================= */
+(function initProgress() {
+  if (typeof gsap === 'undefined') return;
+
+  const bar = $('#spProgressBar');
+  const section = $('#social-proof');
+
+  if (!bar || !section) return;
+
+  gsap.to(bar, {
+    width: "64%",
+    duration: 1.5,
+    scrollTrigger: {
+      trigger: section,
+      start: "top 80%"
+    }
+  });
+})();
+
+/* =========================
+   SCROLL TOP
+========================= */
+(function initScrollTop() {
+  const btn = $('#scrollTop');
+  if (!btn) return;
+
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.create({
+      start: 300,
+      onEnter: () => btn.hidden = false,
+      onLeaveBack: () => btn.hidden = true
+    });
+  }
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+/* =========================
+   NAVBAR MOBILE
+========================= */
+(function initNavbarMobile() {
+  const toggle = $('#navToggle');
+  const menu   = $('#navMenu');
 
   if (!toggle || !menu) return;
 
-  const links = menu.querySelectorAll('.navbar__link, .navbar__cta');
+  const links = $$('.navbar__link, .navbar__cta', menu);
 
-  // Hamburguer toggle
   toggle.addEventListener('click', () => {
     const isOpen = menu.classList.toggle('is-open');
+
     toggle.classList.toggle('is-open', isOpen);
-    toggle.setAttribute('aria-expanded', String(isOpen));
-    toggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+    toggle.setAttribute('aria-expanded', isOpen);
   });
 
-  // Fechar menu ao clicar em link
   links.forEach(link => {
     link.addEventListener('click', () => {
       menu.classList.remove('is-open');
       toggle.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
     });
   });
 
-  // Fechar menu com Escape
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+    if (e.key === 'Escape') {
       menu.classList.remove('is-open');
       toggle.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.focus();
     }
   });
+})();
 
-  // Active state por scroll (Intersection Observer nas seções)
-  const sections = document.querySelectorAll('section[id]');
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          links.forEach(l => l.classList.remove('is-active'));
-          const active = menu.querySelector(`a[href="#${entry.target.id}"]`);
-          if (active) active.classList.add('is-active');
-        }
-      });
-    },
-    { rootMargin: '-40% 0px -55% 0px' }
-  );
-
-  sections.forEach(s => observer.observe(s));
-}
-
-/* ─── Canvas — Partículas de velocidade ─────────────────── */
-function initCanvas() {
-  const canvas = document.getElementById('heroCanvas');
+/* =========================
+   CANVAS PARTICLES
+========================= */
+(function initCanvas() {
+  const canvas = $('#heroCanvas');
   if (!canvas) return;
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const ctx = canvas.getContext('2d');
@@ -76,10 +242,9 @@ function initCanvas() {
     return {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      length: Math.random() * 120 + 40,
-      speed: Math.random() * 6 + 3,
-      opacity: Math.random() * 0.15 + 0.04,
-      width: Math.random() * 1.5 + 0.5,
+      len: Math.random() * 100 + 40,
+      speed: Math.random() * 5 + 2,
+      opacity: Math.random() * 0.15 + 0.05
     };
   }
 
@@ -93,15 +258,15 @@ function initCanvas() {
     particles.forEach(p => {
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
-      ctx.lineTo(p.x + p.length, p.y);
-      ctx.strokeStyle = `rgba(${PRIMARY_RGB}, ${p.opacity})`;
-      ctx.lineWidth = p.width;
+      ctx.lineTo(p.x + p.len, p.y);
+      ctx.strokeStyle = `rgba(106,180,11,${p.opacity})`;
+      ctx.lineWidth = 1;
       ctx.stroke();
 
       p.x += p.speed;
 
-      if (p.x > canvas.width + p.length) {
-        p.x = -p.length - Math.random() * 200;
+      if (p.x > canvas.width) {
+        p.x = -p.len;
         p.y = Math.random() * canvas.height;
       }
     });
@@ -113,258 +278,62 @@ function initCanvas() {
   init();
   draw();
 
-  let resizeTimer;
   window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
     cancelAnimationFrame(raf);
-    resizeTimer = setTimeout(() => { resize(); init(); draw(); }, 120);
+    resize();
+    init();
+    draw();
   });
-}
+})();
 
-/* ─── Parallax ───────────────────────────────────────────── */
-function initParallax() {
-  const img = document.getElementById('heroBgImg');
-  if (!img) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+/* =========================
+   FORM
+========================= */
+(function initForm() {
+  const form = $('#signupForm');
+  if (!form) return;
 
-  let ticking = false;
+  const name  = $('#fieldName');
+  const email = $('#fieldEmail');
+  const errorName  = $('#errorName');
+  const errorEmail = $('#errorEmail');
+  const btn   = $('#submitBtn');
+  const success = $('#formSuccess');
 
-  window.addEventListener('scroll', () => {
-    if (window.innerWidth < 768) {
-      img.style.transform = '';
-      return;
-    }
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        img.style.transform = `translateY(${window.scrollY * 0.4}px)`;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-}
-
-/* ─── Intersection Observer — fade-in-up ────────────────── */
-function initObserver() {
-  const els = document.querySelectorAll('.fade-in-up');
-
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
-
-  els.forEach(el => observer.observe(el));
-}
-
-/* ─── Carrossel ──────────────────────────────────────────── */
-function initCarousel() {
-  const track = document.getElementById('carouselTrack');
-  const dotsContainer = document.getElementById('carouselDots');
-  if (!track || !dotsContainer) return;
-
-  const items = track.querySelectorAll('.carousel__item');
-
-  // Criar dots
-  items.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'carousel__dot' + (i === 0 ? ' is-active' : '');
-    dot.setAttribute('role', 'tab');
-    dot.setAttribute('aria-label', `Screenshot ${i + 1}`);
-    dot.setAttribute('aria-selected', String(i === 0));
-    dot.addEventListener('click', () => scrollToItem(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  function updateDots(index) {
-    dotsContainer.querySelectorAll('.carousel__dot').forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === index);
-      dot.setAttribute('aria-selected', String(i === index));
-    });
-  }
-
-  function scrollToItem(index) {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    items[index].scrollIntoView({
-      behavior: reducedMotion ? 'instant' : 'smooth',
-      block: 'nearest',
-      inline: 'center',
-    });
-    updateDots(index);
-  }
-
-  // Atualizar dots ao scrollar
-  const itemObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-          const index = Array.from(items).indexOf(entry.target);
-          if (index !== -1) updateDots(index);
-        }
-      });
-    },
-    { root: track, threshold: 0.5 }
-  );
-
-  items.forEach(item => itemObserver.observe(item));
-}
-
-/* ─── Contador animado ───────────────────────────────────── */
-function initCounter() {
-  const counterEl = document.getElementById('counterValue');
-  const progressBar = document.getElementById('spProgressBar');
-  if (!counterEl || !progressBar) return;
-
-  const TARGET = 32;
-  const TOTAL = 50;
-  let animated = false;
-
-  function easeOut(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  function animateCounter() {
-    if (animated) return;
-    animated = true;
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (reducedMotion) {
-      counterEl.textContent = TARGET;
-      counterEl.setAttribute('aria-label', `${TARGET} ciclistas`);
-      progressBar.style.width = `${(TARGET / TOTAL) * 100}%`;
-      return;
-    }
-
-    // Start progress bar animation concurrently
-    requestAnimationFrame(() => {
-      progressBar.style.width = `${(TARGET / TOTAL) * 100}%`;
-    });
-
-    const duration = 1200;
-    const start = performance.now();
-
-    function update(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const value = Math.round(easeOut(progress) * TARGET);
-      counterEl.textContent = value;
-      counterEl.setAttribute('aria-label', `${value} ciclistas`);
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      }
-    }
-
-    requestAnimationFrame(update);
-  }
-
-  const observer = new IntersectionObserver(
-    entries => {
-      if (entries[0].isIntersecting) {
-        animateCounter();
-        observer.disconnect();
-      }
-    },
-    { threshold: 0.3 }
-  );
-
-  observer.observe(counterEl);
-}
-
-/* ─── Formulário ─────────────────────────────────────────── */
-function initForm() {
-  const form = document.getElementById('signupForm');
-  const formSuccess = document.getElementById('formSuccess');
-  const submitBtn = document.getElementById('submitBtn');
-  const nameInput = document.getElementById('fieldName');
-  const emailInput = document.getElementById('fieldEmail');
-  const errorName = document.getElementById('errorName');
-  const errorEmail = document.getElementById('errorEmail');
-
-  if (!form || !nameInput || !emailInput || !errorName || !errorEmail || !submitBtn || !formSuccess) return;
-
-  function setError(input, errorEl, message) {
-    input.classList.toggle('has-error', !!message);
-    errorEl.textContent = message;
-  }
-
-  function validateName(value) {
-    if (!value.trim()) return 'Por favor, informe seu nome.';
-    if (value.trim().length < 2) return 'Nome muito curto.';
+  function validateName(v) {
+    if (!v.trim()) return 'Informe seu nome';
+    if (v.length < 2) return 'Nome muito curto';
     return '';
   }
 
-  function validateEmail(value) {
-    if (!value.trim()) return 'Por favor, informe seu e-mail.';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return 'E-mail inválido.';
+  function validateEmail(v) {
+    if (!v.trim()) return 'Informe seu e-mail';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return 'E-mail inválido';
     return '';
   }
 
-  nameInput.addEventListener('blur', () => {
-    setError(nameInput, errorName, validateName(nameInput.value));
-  });
-
-  emailInput.addEventListener('blur', () => {
-    setError(emailInput, errorEmail, validateEmail(emailInput.value));
-  });
+  function setError(input, el, msg) {
+    input.classList.toggle('has-error', !!msg);
+    el.textContent = msg;
+  }
 
   form.addEventListener('submit', e => {
     e.preventDefault();
 
-    const nameErr = validateName(nameInput.value);
-    const emailErr = validateEmail(emailInput.value);
+    const e1 = validateName(name.value);
+    const e2 = validateEmail(email.value);
 
-    setError(nameInput, errorName, nameErr);
-    setError(emailInput, errorEmail, emailErr);
+    setError(name, errorName, e1);
+    setError(email, errorEmail, e2);
 
-    if (nameErr || emailErr) {
-      const firstError = nameErr ? nameInput : emailInput;
-      firstError.focus();
-      return;
-    }
+    if (e1 || e2) return;
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Garantindo sua vaga...';
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
 
     setTimeout(() => {
       form.hidden = true;
-      formSuccess.hidden = false;
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      formSuccess.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'center' });
+      success.hidden = false;
     }, 800);
   });
-}
-
-/* ─── Scroll to top ──────────────────────────────────────── */
-function initScrollTop() {
-  const btn = document.getElementById('scrollTop');
-  if (!btn) return;
-
-  window.addEventListener('scroll', () => {
-    btn.hidden = window.scrollY < 400;
-  }, { passive: true });
-
-  btn.addEventListener('click', () => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: 0, behavior: reducedMotion ? 'instant' : 'smooth' });
-  });
-}
-
-/* ─── Init ──────────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
-  initCanvas();
-  initParallax();
-  initObserver();
-  initCarousel();
-  initCounter();
-  initForm();
-  initScrollTop();
-});
+})();
